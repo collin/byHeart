@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "byheart",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Memorizing speaches, monologes and presentations",
   "engines": {
     "node": ">= 7.0.0"
   },
