@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export const Profile = (props) => {
   const { passages, user } = props
@@ -10,11 +10,18 @@ export const Profile = (props) => {
   return (
     <div>
       <h1>My Profile</h1>
-      <button>New Passage</button>
+      <NavLink to={'/newpassage'}>
+        <button>New Passage</button>
+      </NavLink>
       <ul>
         {filteredPassages && filteredPassages.map(passage => {
           return (
-            <li key={`passage-${passage.id}`}>{passage.title}</li>
+            <li key={`passage-${passage.id}`}>
+              {passage.title}
+              <button>Train</button>
+              <button>Edit</button>
+              <button>Delete</button>
+            </li>
           )
         })}
       </ul>
