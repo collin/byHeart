@@ -5,7 +5,7 @@
  */
 export { default as Training } from './Training'
 export { default as PassageTraining } from './training/PassageTraining'
-
 export { default as Navbar } from './navbar'
 export { default as UserHome } from './user-home'
 export { Login, Signup } from './auth-form'
+export { default as NewPassage } from './NewPassage'

@@ -1,8 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+<<<<<<< HEAD
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
+=======
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {logout} from '../store'
+import './Navbar.css'
+>>>>>>> master
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
