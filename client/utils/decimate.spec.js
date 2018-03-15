@@ -9,22 +9,22 @@ describe('decimateString', () => {
   })
 
   it('should never remove the first letter of a word or the punctuation,', () => {
-    expect(decimateString(text, 50)).to.match(/S. s.... I l..., s........ t... a.. t...,/)
+    expect(decimateString(text, 5)).to.match(/S. s.... I l..., s........ t... a.. t...,/)
   })
 
   it('should always return the same result,', () => {
-    expect(decimateString(text, 10)).to.equal(decimateString(text, 10))
-    expect(decimateString(text, 20)).to.equal(decimateString(text, 20))
-    expect(decimateString(text, 30)).to.equal(decimateString(text, 30))
-    expect(decimateString(text, 40)).to.equal(decimateString(text, 40))
-    expect(decimateString(text, 50)).to.equal(decimateString(text, 50))
-    expect(decimateString(text, 60)).to.equal(decimateString(text, 60))
-    expect(decimateString(text, 70)).to.equal(decimateString(text, 70))
-    expect(decimateString(text, 80)).to.equal(decimateString(text, 80))
-    expect(decimateString(text, 90)).to.equal(decimateString(text, 90))
+    expect(decimateString(text, 1)).to.equal(decimateString(text, 1))
+    expect(decimateString(text, 2)).to.equal(decimateString(text, 2))
+    expect(decimateString(text, 3)).to.equal(decimateString(text, 3))
+    expect(decimateString(text, 4)).to.equal(decimateString(text, 4))
+    expect(decimateString(text, 5)).to.equal(decimateString(text, 5))
+    expect(decimateString(text, 6)).to.equal(decimateString(text, 6))
+    expect(decimateString(text, 7)).to.equal(decimateString(text, 7))
+    expect(decimateString(text, 8)).to.equal(decimateString(text, 8))
+    expect(decimateString(text, 9)).to.equal(decimateString(text, 9))
   })
 
   it('should remove all letters except for the first letters of every word if percentage is 100', () => {
-    expect(decimateString(text, 100)).to.equal('S_ s____ I l___, s________ t___ a__ t___,')
+    expect(decimateString(text, 10)).to.equal('S_ s____ I l___, s________ t___ a__ t___,')
   })
 })
