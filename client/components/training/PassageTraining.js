@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Tab, Sticky } from 'semantic-ui-react'
+import { Tab, Sticky, Container } from 'semantic-ui-react'
 import './PassageTrainer.css'
 
 // import { Link } from 'react-router-dom'
@@ -16,7 +16,10 @@ class PassageTraining extends Component {
 
 
   }
-  handleContextRef = contextRef => this.setState({ contextRef })
+
+  handleContextRef = contextRef => {
+    this.setState({ contextRef })
+  }
   handleInputChange = (e) => {
     this.setState({ degradationLevel: +e.target.value })
   }
@@ -25,19 +28,24 @@ class PassageTraining extends Component {
   render() {
     let { contextRef } = this.state
     return (
-      <div>
-        <Sticky context={contextRef} pushing>
-          <div className="degredation">degradationLevel: {this.state.degradationLevel}
-            <input min={0} max={10} onChange={this.handleInputChange} type="range" value={this.state.degradationLevel} />
+      <Container>
 
+        <div id="stickyZone" ref={this.handleContextRef}>
+          <Sticky context={contextRef} >
+            <div className="degradation">
+              <input id="slideBar" min={0} max={10} onChange={this.handleInputChange} type="range" value={this.state.degradationLevel} />
+            </div>
+          </Sticky>
+
+          <div className="passageText">
+            <p>Carol ate my begal! I hate Carol. She should be... Carol brought me a bagel. She is my bead friend. This is life at the two poles. </p>
+            <p> Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.</p>
+            <p>Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.</p>
+            <p>Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.</p>
+            <p> Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.</p>
           </div>
-        </Sticky>
-        <p className="passageText">
-          Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.
-          Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.
-          Lorem consequat est	Pariatur aliqua sunt fugiat aliqua cillum officia mollit elit reprehenderit ipsum proident consequat. Minim do sint sint deserunt officia tempor commodo sunt labore. Minim labore cillum laborum sunt non exercitation nostrud exercitation culpa in. Cillum amet eu aute sit irure id nulla minim enim pariatur. Excepteur anim quis aute duis amet.  Laborum et dolore commodo voluptate laboris pariatur ullamco sit commodo irure cillum. Non amet laboris occaecat veniam sunt nostrud quis adipisicing dolor cupidatat deserunt. In anim veniam officia tempor laborum qui laborum sunt proident. Qui cillum mollit anim et incididunt magna ut ut veniam deserunt id pariatur amet minim.  Culpa ex sit ipsum in consequat occaecat.
-        </p>
-      </div>
+        </div>
+      </Container>
     )
   }
 }

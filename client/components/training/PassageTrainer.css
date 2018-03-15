@@ -1,6 +1,18 @@
 /* PassageTrainer css */
 
-.degredation {
+.degradation {
     display: block;
-    background-color: rgb(252, 17, 17);
+    background-color: white;
+    text-align: center;
+}
+
+#slideBar {
+    width: 80%;
+    min-width: 200pxs;
+}
+
+.passageText {
+    font-size: 2em;
+    font-family: PancakeFont, FallbackFont, sans-serif;
+    color: BLACK;
 }
