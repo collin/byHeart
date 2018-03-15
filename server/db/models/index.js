@@ -15,8 +15,8 @@ const Passage = require('./passage')
  * instead of: const User = require('../db/models/user')
  */
 
-// Passage.belongsToMany(User, { through: 'reader' })
-// User.hasOne(Passage, { as: 'author' })
+Passage.belongsToMany(User, { through: 'reader' })
+User.hasOne(Passage, { as: 'author' })
 
 
 module.exports = {
