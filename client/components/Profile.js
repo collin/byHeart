@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { gotPassage } from '../store/passage'
+import history from '../history'
 
 export const Profile = (props) => {
-  const { passages, user } = props
+  const { passages, user, handleNewPassage } = props
   const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
   return (
     <div>
       <h1>My Profile</h1>
-      <NavLink to={'/newpassage'}>
-        <button>New Passage</button>
-      </NavLink>
+      <button onClick={handleNewPassage}>New Passage</button>
       <ul>
         {filteredPassages && filteredPassages.map(passage => {
           return (
@@ -36,7 +35,17 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState)(Profile)
+const mapDispatch = (dispatch) => {
+  return {
+    handleNewPassage() {
+      localStorage.clear()
+      dispatch(gotPassage({}))
+      history.push('/newpassage')
+    },
+  }
+}
+
+export default connect(mapState, mapDispatch)(Profile)
 
 Profile.propTypes = {
   passages: PropTypes.arrayOf(
