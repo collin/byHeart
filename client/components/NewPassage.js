@@ -21,7 +21,7 @@ class NewPassage extends Component {
       <Segment style={{ marginLeft: '2%', marginRight: '2%' }}>
         <Form onSubmit={handleSubmit}>
           <Label pointing="below" size="large">Please enter the passage's title and content</Label>
-          <Input style={{ width: '100%', marginLeft: "0" }} id="formTitle" name="passageTitle" placeholder="Title" />
+          <Input style={{ width: '100%', marginLeft: '0' }} id="formTitle" name="passageTitle" placeholder="Title" />
           <TextArea id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
