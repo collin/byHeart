@@ -1,12 +1,12 @@
 import reducer, { gotPassage } from './passage'
 import { expect } from 'chai'
-import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import configureMockStore from 'redux-mock-store'
-import thunkMiddleware from 'redux-thunk'
+// import axios from 'axios'
+// import MockAdapter from 'axios-mock-adapter'
+// import configureMockStore from 'redux-mock-store'
+// import thunkMiddleware from 'redux-thunk'
 
-const middlewares = [thunkMiddleware]
-const mockStore = configureMockStore(middlewares)
+// const middlewares = [thunkMiddleware]
+// const mockStore = configureMockStore(middlewares)
 
 describe('Passage Store', () => {
   describe('action creators', () => {
