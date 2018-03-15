@@ -1,6 +1,6 @@
 const piDigits = require('./pi-digits')
 const whiteSpace = ' \t\n'
-const excludedCharacters = '`~!@#$%^&*()-_=+[{]}\\|;:\'",<.>/?` \t\n'
+const excludedCharacters = '`~!@#$%^&*()-_=+[{]}\\|;:\'"“‘’”,<.>/?` \t\n'
 
 const markStringForDecimation = (text) => {
   text = text.trim()
