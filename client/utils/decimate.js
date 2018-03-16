@@ -37,4 +37,19 @@ const decimateString = (text, rate = 10) => {
   return decimatedText
 }
 
+const str = `I all alone beweep my outcast state,
+And trouble deaf heaven with my bootless cries,`
+
+console.log(decimateString(str, 0), '\n')
+console.log(decimateString(str, 1), '\n')
+console.log(decimateString(str, 2), '\n')
+console.log(decimateString(str, 3), '\n')
+console.log(decimateString(str, 4), '\n')
+console.log(decimateString(str, 5), '\n')
+console.log(decimateString(str, 6), '\n')
+console.log(decimateString(str, 7), '\n')
+console.log(decimateString(str, 8), '\n')
+console.log(decimateString(str, 9), '\n')
+console.log(decimateString(str, 10), '\n')
+
 module.exports = { decimateString }
