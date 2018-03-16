@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Sticky, Container } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
-
+import { buildDecimationLevels } from '../../utils/tokenize'
 // import { Link } from 'react-router-dom'
 // import { logout } from '../store'
 
@@ -64,7 +64,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    decimateString: (text, level) => decimateString(text, level)
+    decimateString: (text, level) => decimateString(text, level),
+    buildDecimationLevels: (text, level) => buildDecimationLevels(text, level),
   }
 }
 
