@@ -47,31 +47,31 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${passages.length} passages`)
   console.log(`seeded successfully`)
-  await seedPassages()
+  // await seedPassages()
 }
 
-async function seedPassages() {
-  console.log('seeding passages')
+// async function seedPassages() {
+//   console.log('seeding passages')
 
-  const promiseArray = []
-  for (let i = 0; i < 50; i++) {
-    promiseArray.push(Passage.create(
-      {
-        title: ipsum(titleIpsumObj)
-        , content: ipsum(contentIpsumObj)
-        , isPublic: false
-      }))
-    promiseArray.push(Passage.create(
-      {
-        title: ipsum(titleIpsumObj)
-        , content: ipsum(contentIpsumObj)
-        , isPublic: true
-      }))
-  }
-  const done = await Promise.all(promiseArray)
-  console.log(`Seeded ${done.length} Passages`)
+//   const promiseArray = []
+//   for (let i = 0; i < 50; i++) {
+//     promiseArray.push(Passage.create(
+//       {
+//         title: ipsum(titleIpsumObj)
+//         , content: ipsum(contentIpsumObj)
+//         , isPublic: false
+//       }))
+//     promiseArray.push(Passage.create(
+//       {
+//         title: ipsum(titleIpsumObj)
+//         , content: ipsum(contentIpsumObj)
+//         , isPublic: true
+//       }))
+//   }
+//   const done = await Promise.all(promiseArray)
+//   console.log(`Seeded ${done.length} Passages`)
 
-}
+// }
 // Execute the `seed` function
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`

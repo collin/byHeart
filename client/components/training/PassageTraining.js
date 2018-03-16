@@ -27,8 +27,9 @@ class PassageTraining extends Component {
   handlePaginationChange = (e, { decimateLevel }) => this.setState({ decimateLevel })
   render() {
     let { contextRef } = this.state
-    let content = !this.props.passage.content ? '' :
-      this.props.decimateString(this.props.state.passage.content, this.state.decimateLevel)
+
+    let content = !this.props.content ? '' :
+      this.props.decimateString(this.props.content, this.state.decimateLevel)
 
 
     return (
@@ -56,7 +57,7 @@ class PassageTraining extends Component {
  */
 const mapState = state => {
   return {
-    passage: state.passage,
+    content: state.passage.content,
     isLoggedIn: !!state.user.id
   }
 }

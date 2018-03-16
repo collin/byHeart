@@ -19,10 +19,9 @@ const Training = (props) => {
     { menuItem: 'Lines', render: () => <Tab.Pane key="2">{<button>this is a button</button>}</Tab.Pane> },
     { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Tab 3 Content</Tab.Pane> },
   ]
-  const titleReady = props.passage && props.passage.title
   return (
     <div>
-      <h3 className="documentTitle">{titleReady ? props.passage.title : 'Untitled Document'}
+      <h3 className="documentTitle">{props.title ? props.title : 'Untitled Document'}
       </h3>
       <div className="container">
         {
@@ -39,6 +38,7 @@ const Training = (props) => {
  */
 const mapState = state => {
   return {
+    title: state.passage.title,
     isLoggedIn: !!state.user.id
   }
 }
