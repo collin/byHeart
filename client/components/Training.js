@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import PassageTraining from './training/PassageTraining'
-// import { Link } from 'react-router-dom'
-// import { logout } from '../store'
-
+import './Training.css'
 const Training = (props) => {
 
   const panes = [
@@ -21,9 +19,11 @@ const Training = (props) => {
     { menuItem: 'Lines', render: () => <Tab.Pane key="2">{<button>this is a button</button>}</Tab.Pane> },
     { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Tab 3 Content</Tab.Pane> },
   ]
+  const titleReady = props.passage && props.passage.title
   return (
     <div>
-      <h3>Banana</h3>
+      <h3 className="documentTitle">{titleReady ? props.passage.title : 'Untitled Document'}
+      </h3>
       <div className="container">
         {
           <Tab panes={panes} />
@@ -45,9 +45,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // handleClick() {
-    //   dispatch(logout())
-    // }
   }
 }
 
@@ -57,6 +54,5 @@ export default connect(mapState, mapDispatch)(Training)
  * PROP TYPES
  */
 Training.propTypes = {
-  // handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

@@ -1,0 +1,6 @@
+.documentTitle {
+    text-align: center;
+    font-size: 2em;
+    font-family: PancakeFont, FallbackFont, sans-serif;
+    color: BLACK;
+}
