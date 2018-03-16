@@ -12,6 +12,7 @@
 const db = require('../server/db')
 const { User, Passage } = require('../server/db/models')
 const ipsum = require('lorem-ipsum')
+const seedPassages = require('./passages')
 const contentIpsumObj = {
   count: 3                     // Number of words, sentences, or paragraphs to generate.
   , units: 'paragraphs'            // Generate words, sentences, or paragraphs.
@@ -31,19 +32,20 @@ const titleIpsumObj = {
   , random: Math.random
 }
 
+
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
-  // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
-  // executed until that promise resolves!
 
   const users = await Promise.all([
     User.create({ email: 'cody@email.com', password: '123' }),
     User.create({ email: 'murphy@email.com', password: '123' })
   ])
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
+
+  const passages = await Passage.bulkCreate(seedPassages)
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${passages.length} passages`)
   console.log(`seeded successfully`)
   await seedPassages()
 }
