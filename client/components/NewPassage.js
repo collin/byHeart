@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { gotPassage } from '../store'
+import { gotPassage, addPassage } from '../store'
+import { postPassage } from '../store/passages';
 
 class NewPassage extends Component {
 
@@ -14,7 +15,7 @@ class NewPassage extends Component {
   }
   render() {
 
-    const { handleSubmit, passage } = this.props
+    const { handleSubmit, passage, handleSave } = this.props
     // console.log('passage in render: ', passage)
 
     const title = passage.title ? passage.title : ''
@@ -29,7 +30,7 @@ class NewPassage extends Component {
           <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
-            <Button content="Clear" floated="right" style={{ marginRight: '2%' }} />
+            <Button onClick={(event) => {handleSave(passage, event)}} content="Save" floated="right" style={{ marginRight: '2%' }} />
           </div>
         </Form>
       </Segment>
@@ -60,6 +61,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     handlePassageFromLocal(passage) {
       dispatch(gotPassage(passage))
+    },
+    handleSave(passage, event) {
+      passage.title = document.getElementById('formTitle').value
+      passage.content = document.getElementById('formContent').value
+      event.preventDefault()
+      if (this.state.user && !passage.id){
+        passage.authorId = this.state.user.id
+        dispatch(postPassage(passage))
+      }
     }
   }
 }
