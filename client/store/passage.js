@@ -19,6 +19,11 @@ export const gotPassage = passage => ({ type: GOT_PASSAGE, passage })
  * THUNK CREATORS
  */
 
+export const passPassage = (passage) =>
+  dispatch => (
+    dispatch(gotPassage(passage))
+  )
+
 /**
  * REDUCER
  */

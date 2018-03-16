@@ -15,7 +15,7 @@ class NewPassage extends Component {
   }
   render() {
 
-    const { handleSubmit, passage, handleSave } = this.props
+    const { handleSubmit, passage, handleSave, isLoggedIn, authorId } = this.props
     // console.log('passage in render: ', passage)
 
     const title = passage.title ? passage.title : ''
@@ -30,7 +30,7 @@ class NewPassage extends Component {
           <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
-            <Button onClick={(event) => {handleSave(passage, event)}} content="Save" floated="right" style={{ marginRight: '2%' }} />
+            <Button onClick={(event) => {handleSave(authorId, passage, event)}} content="Save" floated="right" style={{ marginRight: '2%' }} />
           </div>
         </Form>
       </Segment>
@@ -47,7 +47,8 @@ const mapState = (state) => {
   console.log('state: ', state)
   return {
     isLoggedIn: !!state.user.id,
-    passage: state.passage
+    passage: state.passage,
+    authorId: state.user.id
   }
 }
 
@@ -62,12 +63,12 @@ const mapDispatchToProps = (dispatch) => {
     handlePassageFromLocal(passage) {
       dispatch(gotPassage(passage))
     },
-    handleSave(passage, event) {
+    handleSave(authorId, passage, event) {
       passage.title = document.getElementById('formTitle').value
       passage.content = document.getElementById('formContent').value
       event.preventDefault()
-      if (this.state.user && !passage.id){
-        passage.authorId = this.state.user.id
+      if (authorId && !passage.id){
+        passage.authorId = authorId
         dispatch(postPassage(passage))
       }
     }

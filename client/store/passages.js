@@ -1,5 +1,5 @@
 import axios from 'axios'
-import gotPassage from './passage'
+import { passPassage } from './passage'
 
 const GOT_PASSAGES = 'GOT_PASSAGES'
 const ADD_PASSAGE = 'ADD_PASSAGE'
@@ -29,7 +29,7 @@ export const postPassage = (passage) =>
       .then(res => res.data)
       .then(newPassage => {
         dispatch(addPassage(newPassage))
-        dispatch(gotPassage(newPassage))
+        dispatch(passPassage(newPassage))
       })
       .catch(err => console.error('posting new passage went wrong', err))
 
