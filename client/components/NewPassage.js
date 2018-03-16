@@ -25,6 +25,7 @@ class NewPassage extends Component {
           <TextArea id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
+            <Button content="Clear" floated="right" style={{ marginRight: '2%' }} />
           </div>
         </Form>
       </Segment>
