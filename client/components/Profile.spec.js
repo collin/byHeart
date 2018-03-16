@@ -13,7 +13,7 @@ describe('<Profile />', () => {
   let user = { id: 1 }
 
   beforeEach(() => {
-    passages = shallow(<Profile passages={seedPassages} user={user} />)
+    passages = shallow(<Profile passages={seedPassages} user={user} loadInitialData={() => {}} />)
   })
 
   it('should render as an h1', () => {
