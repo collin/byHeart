@@ -16,3 +16,9 @@
     font-family: PancakeFont, FallbackFont, sans-serif;
     color: BLACK;
 }
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 900px;
+}

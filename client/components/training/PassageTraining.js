@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Tab, Sticky, Container } from 'semantic-ui-react'
+import { Sticky, Container } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
 
@@ -32,7 +32,7 @@ class PassageTraining extends Component {
 
 
     return (
-      <Container>
+      <div className="container">
         <div id="stickyZone" ref={this.handleContextRef}>
           <Sticky context={contextRef} >
             <div className="decimate">
@@ -46,7 +46,7 @@ class PassageTraining extends Component {
             }</p>
           </div>
         </div>
-      </Container >
+      </div>
     )
   }
 }
@@ -72,6 +72,6 @@ export default connect(mapState, mapDispatch)(PassageTraining)
 /**
  * PROP TYPES
  */
-PassageTraining.propTypes = {
-  // handleClick: PropTypes.func.isRequired,
-}
+// PassageTraining.propTypes = {
+
+// }
