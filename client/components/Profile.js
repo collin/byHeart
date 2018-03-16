@@ -5,7 +5,7 @@ import { gotPassage } from '../store/passage'
 import history from '../history'
 
 export const Profile = (props) => {
-  const { passages, user, handleNewPassage } = props
+  const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage } = props
   const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
   return (
@@ -17,8 +17,8 @@ export const Profile = (props) => {
           return (
             <li key={`passage-${passage.id}`}>
               {passage.title}
-              <button>Train</button>
-              <button>Edit</button>
+              <button onClick={() => {handleTrainPassage(passage)}}>Train</button>
+              <button onClick={() => {handleEditPassage(passage)}}>Edit</button>
               <button>Delete</button>
             </li>
           )
@@ -42,6 +42,16 @@ const mapDispatch = (dispatch) => {
       dispatch(gotPassage({}))
       history.push('/newpassage')
     },
+    handleEditPassage(passage) {
+      localStorage.setItem('passage', JSON.stringify(passage))
+      dispatch(gotPassage(passage))
+      history.push('/newpassage')
+    },
+    handleTrainPassage(passage) {
+      localStorage.setItem('passage', JSON.stringify(passage))
+      dispatch(gotPassage(passage))
+      history.push('/train')
+    }
   }
 }
 
