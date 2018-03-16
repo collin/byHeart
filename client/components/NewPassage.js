@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { gotPassage, addPassage } from '../store'
-import { postPassage } from '../store/passages';
+import { gotPassage } from '../store'
+import { postPassage } from '../store/passages'
 
 class NewPassage extends Component {
 
@@ -15,9 +15,7 @@ class NewPassage extends Component {
   }
   render() {
 
-    const { handleSubmit, passage, handleSave, isLoggedIn, authorId } = this.props
-    // console.log('passage in render: ', passage)
-
+    const { handleSubmit, passage, handleSave, authorId } = this.props
     const title = passage.title ? passage.title : ''
     const content = passage.content ? passage.content : ''
 
@@ -44,7 +42,6 @@ function setPassageLocals(passage) {
 }
 
 const mapState = (state) => {
-  console.log('state: ', state)
   return {
     isLoggedIn: !!state.user.id,
     passage: state.passage,
