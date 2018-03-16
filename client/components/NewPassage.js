@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, TextArea, Button } from 'semantic-ui-react'
+import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { gotPassage } from '../store'
 
@@ -16,16 +16,19 @@ class NewPassage extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <div id="form">
-        <p>Enter your passage title and text in the fields bello and click START:</p>
-        <Form fluid="true" onSubmit={handleSubmit}>
-          <Form.Field id="formTitle"  name="passageTitle" control={Input} label="Title" placeholder="Enter a title for your passage" />
-          <Form.Field id="formContent" name="passageContent" control={TextArea} label="Passage" placeholder="Enter or paste your passage here..." />
-          <div>
-            <Form.Button control={Button} content="Start" />
+
+
+      <Segment style={{ marginLeft: '2%', marginRight: '2%' }}>
+        <Form onSubmit={handleSubmit}>
+          <Label pointing="below" size="large">Please enter the passage's title and content</Label>
+          <Input style={{ width: '100%', marginLeft: '0' }} id="formTitle" name="passageTitle" placeholder="Title" />
+          <TextArea id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
+          <div style={{ width: '100%' }}>
+            <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
           </div>
         </Form>
-      </div>
+      </Segment>
+
     )
   }
 }
