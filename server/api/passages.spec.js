@@ -1,6 +1,7 @@
 import  { expect } from 'chai'
 const db = require('../db')
 const Passage = db.model('passage')
+const User    = db.model('user')
 const app = require('../index')
 const request = require('supertest')
 
@@ -37,6 +38,31 @@ describe('Passage routes', () => {
         .then(res => {
           expect(res.body).to.be.an('array')
           expect(res.body.length).to.be.equal(2)
+        })
+    })
+  })
+
+  describe('POST /api/passages', () => {
+    const user = { email: 't@t.com', password: '123' }
+    const passage = { title: 'my title', content: 'my content' }
+    let userId
+
+    beforeEach(() => {
+      return User.create(user)
+        .then(newUser => {
+          userId = newUser.id
+          return userId
+        })
+    })
+
+    it('should create a new passage', () => {
+      passage.authorId = userId
+      return request(app)
+        .post(`/api/passages/`)
+        .send(passage)
+        .expect(201)
+        .then(res => {
+          expect(res.body.title).to.be.equal('my title')
         })
     })
   })
