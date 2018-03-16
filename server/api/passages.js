@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Op } = require('sequelize')
 const { Passage } = require('../db/models')
 
-// GET /api/passages/ [Op.or]: [{authorId: 12}, {authorId: 13}]
+// GET /api/passages/
 router.get('/', (req, res, next) => {
   // console.log(req.user)
   const where = req.user ?
@@ -14,5 +14,12 @@ router.get('/', (req, res, next) => {
     .then(passages => res.json(passages))
     .catch(next)}
 )
+
+// POST /api/passages/
+router.post('/', (req, res, next) => {
+  Passage.create(req.body)
+    .then(newPassage => res.status(201).json(newPassage))
+    .catch(next)
+})
 
 module.exports = router
