@@ -11,12 +11,6 @@
     min-width: 200pxs;
 }
 
-.passageText {
-    font-size: 2em;
-    font-family: PancakeFont, FallbackFont, sans-serif;
-    color: BLACK;
-}
-
 .container {
     margin-right: auto;
     margin-left: auto;
