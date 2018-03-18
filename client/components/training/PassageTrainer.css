@@ -14,7 +14,8 @@
 .passageText {
     font-size: 2em;
     font-family: PancakeFont, FallbackFont, sans-serif;
-    color: BLACK;
+    color: black;
+    line-height: 1.5em;
 }
 
 .container {

@@ -5,6 +5,7 @@ import { Sticky, Container } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { buildDecimationLevels } from '../../utils/tokenize'
+import TextWithLineBreaks from './TextWithLineBreaks'
 // import { Link } from 'react-router-dom'
 // import { logout } from '../store'
 
@@ -25,6 +26,8 @@ class PassageTraining extends Component {
   }
 
   handlePaginationChange = (e, { decimateLevel }) => this.setState({ decimateLevel })
+
+
   render() {
     let { contextRef } = this.state
 
@@ -42,9 +45,7 @@ class PassageTraining extends Component {
           </Sticky>
 
           <div className="passageText">
-            <p>{
-              content
-            }</p>
+            <TextWithLineBreaks text={content} />
           </div>
         </div>
       </div>
