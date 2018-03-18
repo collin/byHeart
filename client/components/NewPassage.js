@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { gotPassage } from '../store'
-import { postPassage } from '../store/passages'
+import { postPassage, updatePassage, gotPassage } from '../store/'
 import history from '../history'
 
 class NewPassage extends Component {
@@ -16,7 +15,7 @@ class NewPassage extends Component {
 
   render() {
 
-    const { handleSubmit, passage, handleSave, authorId } = this.props
+    const { handleSubmit, passage, handleSave, authorId, handleUpdate } = this.props
     const title = passage.title ? passage.title : ''
     const content = passage.content ? passage.content : ''
 
@@ -29,8 +28,13 @@ class NewPassage extends Component {
           <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
-            {authorId &&
-              <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
+            {(authorId && !passage.id)
+              ? <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
+              : null
+            }
+            {(passage.id && authorId && passage.authorId === authorId)
+              ? <Button onClick={(event) => {handleUpdate(passage, event)}} content="Update" floated="right" style={{ marginRight: '2%' }} />
+              : null
             }
           </div>
         </Form>
@@ -71,6 +75,14 @@ const mapDispatchToProps = (dispatch) => {
       if (authorId && !passage.id) {
         passage.authorId = authorId
         dispatch(postPassage(passage))
+      }
+    },
+    handleUpdate(passage, event) {
+      passage.title = document.getElementById('formTitle').value
+      passage.content = document.getElementById('formContent').value
+      event.preventDefault()
+      if (passage.id) {
+        dispatch(updatePassage(passage))
       }
     }
   }
