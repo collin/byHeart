@@ -18,6 +18,10 @@ class PassageTraining extends Component {
     }
   }
 
+  componentDidMount() {
+    this.slideBar.focus()
+  }
+
   handleContextRef = contextRef => {
     this.setState({ contextRef })
   }
@@ -40,7 +44,15 @@ class PassageTraining extends Component {
         <div id="stickyZone" ref={this.handleContextRef}>
           <Sticky context={contextRef} >
             <div className="decimate">
-              <input id="slideBar" min={0} max={10} onChange={this.handleInputChange} type="range" value={this.state.decimateLevel} />
+              <input
+                id="slideBar"
+                min={0}
+                max={10}
+                onChange={this.handleInputChange}
+                type="range"
+                value={this.state.decimateLevel}
+                ref={(input) => { this.slideBar = input }}
+              />
             </div>
           </Sticky>
 
