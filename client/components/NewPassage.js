@@ -3,16 +3,17 @@ import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react
 import { connect } from 'react-redux'
 import { gotPassage } from '../store'
 import { postPassage } from '../store/passages'
+import history from '../history'
 
 class NewPassage extends Component {
 
   componentWillReceiveProps() {
-
     if (!this.props.passage.title && localStorage.passage) {
       const passage = JSON.parse(localStorage.getItem('passage'))
       this.props.handlePassageFromLocal(passage)
     }
   }
+
   render() {
 
     const { handleSubmit, passage, handleSave, authorId } = this.props
@@ -28,7 +29,9 @@ class NewPassage extends Component {
           <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
-            <Button onClick={(event) => {handleSave(authorId, passage, event)}} content="Save" floated="right" style={{ marginRight: '2%' }} />
+            {authorId &&
+              <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
+            }
           </div>
         </Form>
       </Segment>
@@ -56,6 +59,7 @@ const mapDispatchToProps = (dispatch) => {
       const passage = { title: event.target.passageTitle.value, content: event.target.passageContent.value }
       setPassageLocals(passage)
       dispatch(gotPassage(passage))
+      history.push('/train')
     },
     handlePassageFromLocal(passage) {
       dispatch(gotPassage(passage))
@@ -64,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
       passage.title = document.getElementById('formTitle').value
       passage.content = document.getElementById('formContent').value
       event.preventDefault()
-      if (authorId && !passage.id){
+      if (authorId && !passage.id) {
         passage.authorId = authorId
         dispatch(postPassage(passage))
       }
