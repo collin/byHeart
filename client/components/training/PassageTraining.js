@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Sticky, Container } from 'semantic-ui-react'
+import { Sticky } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { buildDecimationLevels } from '../../utils/tokenize'
@@ -20,11 +20,12 @@ class PassageTraining extends Component {
   handleContextRef = contextRef => {
     this.setState({ contextRef })
   }
-  handleInputChange = (e) => {
-    this.setState({ decimateLevel: +e.target.value })
+  handleInputChange = (event) => {
+    this.setState({ decimateLevel: +event.target.value })
   }
 
-  handlePaginationChange = (e, { decimateLevel }) => this.setState({ decimateLevel })
+  handlePaginationChange = (event, { decimateLevel }) => this.setState({ decimateLevel })
+
   render() {
     let { contextRef } = this.state
 
@@ -62,7 +63,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = () => {
   return {
     decimateString: (text, level) => decimateString(text, level),
     buildDecimationLevels: (text, level) => buildDecimationLevels(text, level),
