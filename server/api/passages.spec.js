@@ -66,4 +66,28 @@ describe('Passage routes', () => {
         })
     })
   })
+
+  describe('PUT /api/passages/:id', () => {
+    const user = { email: 't@t.com', password: '123' }
+    const passage = { title: 'my title', content: 'my content' }
+
+    beforeEach(() => {
+      return User.create(user)
+        .then(newUser => {
+          passage.id = newUser.id
+          return Passage.create(passage)
+        })
+    })
+
+    it('should update an existing pin', () => {
+      return request(app)
+        .put(`/api/passages/${passage.id}`)
+        .send({ title: 'new title' })
+        .expect(200)
+        .then(res => {
+          expect(res.body.title).to.equal('new title')
+        })
+    })
+  })
+
 })

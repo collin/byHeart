@@ -22,4 +22,14 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+// PUT /api/passages/
+router.put('/:id', (req, res, next) => {
+  Passage.findById(req.params.id)
+    .then(passage => {
+      return passage.update(req.body)
+    })
+    .then(passage => res.json(passage))
+    .catch(next)
+})
+
 module.exports = router
