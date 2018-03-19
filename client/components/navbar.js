@@ -4,33 +4,44 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
+import { Menu, Button, Image } from 'semantic-ui-react'
 
 import './Navbar.css'
+//import Logo from '../../public/byheart-logo.png'
 
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>by❤️</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/train">Train</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
-    </nav>
-    <hr />
-  </div>
+  <Menu borderless className="navbar" fixed="top">
+    <Menu.Menu>
+      {/*<Menu.Item as="a" header>
+        <Image
+          size="mini"
+          src={Logo}
+          style={{ marginRight: '1.5em' }}
+        />
+</Menu.Item>*/}
+      <Menu.Item style={{ fontSize: '1.5em', padding: '0.7em' }}>
+        by<a href="/">❤️</a>
+      </Menu.Item>
+    </Menu.Menu>
+    {isLoggedIn ?
+      <Menu.Menu position="right">
+        {/* The navbar will show these links after you log in */}
+        <Menu.Item>
+          <Button className="navButton" style={{marginLeft: '0.5em'}} as={Link} to="/">Home</Button>
+          <Button className="navButton" style={{marginLeft: '0.5em'}} as={Link} to="/" href="#" onClick={handleClick}>Logout</Button>
+        </Menu.Item>
+      </Menu.Menu>
+      :
+      <Menu.Menu position="right">
+        {/* The navbar will show these links before you log in */}
+        <Menu.Item>
+          <Button className="navButton" style={{marginLeft: '0.5em'}} as={Link} to="/login">Login</Button>
+          <Button className="navButton" style={{marginLeft: '0.5em'}} as={Link} to="/signup">Sign Up</Button>
+        </Menu.Item>
+      </Menu.Menu>
+    }
+  </Menu>
 )
 
 /**
@@ -53,8 +64,8 @@ const mapDispatch = dispatch => {
 export default connect(mapState, mapDispatch)(Navbar)
 
 /**
- * PROP TYPES
- */
+* PROP TYPES
+*/
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired

@@ -1,5 +1,8 @@
 body {
-  font-family: sans-serif;
+  font-family: PancakeFont, FallbackFont, sans-serif;
+  font-size: 1em;
+  background-color: #F5F5F5;
+  padding-top: 70px
 }
 
 a {

@@ -21,21 +21,21 @@ class NewPassage extends Component {
     const content = passage.content ? passage.content : ''
 
     return (
-
-      <Segment style={{ marginLeft: '2%', marginRight: '2%' }}>
-        <Form onSubmit={handleSubmit}>
-          <Label pointing="below" size="large">Please enter the passage's title and content</Label>
-          <Input defaultValue={title} style={{ width: '100%', marginLeft: '0' }} id="formTitle" name="passageTitle" placeholder="Title" />
-          <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
-          <div style={{ width: '100%' }}>
-            <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
-            {authorId &&
-              <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
-            }
-          </div>
-        </Form>
-      </Segment>
-
+      <div>
+        <Segment style={{ marginLeft: '2%', marginRight: '2%', paddingTop: '80px' }}>
+          <Form onSubmit={handleSubmit}>
+            <Label pointing="below" size="large">Please enter the passage's title and content</Label>
+            <Input defaultValue={title} style={{ width: '100%', marginLeft: '0' }} id="formTitle" name="passageTitle" placeholder="Title" />
+            <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
+            <div style={{ width: '100%' }}>
+              <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
+              {authorId &&
+                <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
+              }
+            </div>
+          </Form>
+        </Segment>
+      </div>
     )
   }
 }
