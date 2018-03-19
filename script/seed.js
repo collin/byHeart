@@ -11,26 +11,26 @@
  */
 const db = require('../server/db')
 const { User, Passage } = require('../server/db/models')
-const ipsum = require('lorem-ipsum')
+// const ipsum = require('lorem-ipsum')
 const seedPassages = require('./passages')
-const contentIpsumObj = {
-  count: 3                     // Number of words, sentences, or paragraphs to generate.
-  , units: 'paragraphs'            // Generate words, sentences, or paragraphs.
-  , sentenceLowerBound: 5         // Minimum words per sentence.
-  , sentenceUpperBound: 15        // Maximum words per sentence.
-  , paragraphLowerBound: 1        // Minimum sentences per paragraph.
-  , paragraphUpperBound: 5        // Maximum sentences per paragraph.
-  , format: 'plain'               // Plain text or html
-  //, words: ['ad', 'dolor', ... ]  // Custom word dictionary. Uses dictionary.words (in lib/dictionary.js) by default.
-  , random: Math.random           // A PRNG function. Uses Math.random by default
-  // , suffix: EOL                   // The character to insert between paragraphs. Defaults to default EOL for your OS.
-}
-const titleIpsumObj = {
-  count: 3
-  , units: 'words'
-  , format: 'plain'
-  , random: Math.random
-}
+// const contentIpsumObj = {
+//   count: 3                     // Number of words, sentences, or paragraphs to generate.
+//   , units: 'paragraphs'            // Generate words, sentences, or paragraphs.
+//   , sentenceLowerBound: 5         // Minimum words per sentence.
+//   , sentenceUpperBound: 15        // Maximum words per sentence.
+//   , paragraphLowerBound: 1        // Minimum sentences per paragraph.
+//   , paragraphUpperBound: 5        // Maximum sentences per paragraph.
+//   , format: 'plain'               // Plain text or html
+//   //, words: ['ad', 'dolor', ... ]  // Custom word dictionary. Uses dictionary.words (in lib/dictionary.js) by default.
+//   , random: Math.random           // A PRNG function. Uses Math.random by default
+//   // , suffix: EOL                   // The character to insert between paragraphs. Defaults to default EOL for your OS.
+// }
+// const titleIpsumObj = {
+//   count: 3
+//   , units: 'words'
+//   , format: 'plain'
+//   , random: Math.random
+// }
 
 
 async function seed() {
