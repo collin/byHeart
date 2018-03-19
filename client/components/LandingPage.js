@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { gotPassage } from '../store/passage'
+import history from '../history'
 import { Button, Container, Header, Grid, Segment, Card, CardContent, CardGroup } from 'semantic-ui-react'
 
 
@@ -8,7 +10,12 @@ const card1 = [
   'To start memorizing your own text press Get Started. On the next page enter the title and text of your passage and press Start.'
 ]
 const card2 = ['Chose full text or line-by-line view']
-export const LandingPage = () => {
+
+export const LandingPage = (props) => {
+
+  const { passages, handleTrainPassage, handleStartPassage } = props
+
+  const firstPassage = passages.filter(passage => passage.id === 1)
 
   return (
     <Segment textAlign="center" style={{ minHeight: 700 }} vertical>
@@ -35,14 +42,17 @@ export const LandingPage = () => {
               }}
             />
             <Button.Group style={{ marginBottom: '1em' }}>
-              <Button basic color="purple" as={Link} to="/newpassage">Get Started</Button>
+              <Button basic color="purple" onClick={handleStartPassage}>Get Started</Button>
               <Button.Or />
-              <Button basic color="purple" as={Link} to="/train">Try An Example</Button>
+              {
+                firstPassage &&
+                <Button onClick={() => {handleTrainPassage(firstPassage[0])}} basic color="purple">Try An Example</Button>
+              }
             </Button.Group>
           </Container>
         </Grid.Row>
 
-        <Grid.Row style={{ padding: '0em', marginTop: '3em' }} vertical>
+        <Grid.Row style={{ padding: '0em', marginTop: '3em' }}>
           <Grid columns={3}>
             <Grid.Column width={4}>
               <Card color="purple" style={{ minHeight: 150, fontSize: '1.3em' }}>
@@ -69,4 +79,24 @@ export const LandingPage = () => {
   )
 }
 
-export default LandingPage
+const mapState = (state) => {
+  return {
+    passages: state.passages
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleTrainPassage(passage) {
+      localStorage.setItem('passage', JSON.stringify(passage))
+      dispatch(gotPassage(passage))
+      history.push('/train')
+    },
+    handleStartPassage() {
+      dispatch(gotPassage({}))
+      history.push('/newpassage')
+    }
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(LandingPage)

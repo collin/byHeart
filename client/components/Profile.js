@@ -15,7 +15,7 @@ export const Profile = (props) => {
       <ul>
         {filteredPassages && filteredPassages.map(passage => {
           return (
-            <li key={`passage-${passage.id}`}>
+            <li key={`pasage-${passage.id}`}>
               {passage.title}
               <button onClick={() => {handleTrainPassage(passage)}}>Train</button>
               <button onClick={() => {handleEditPassage(passage)}}>Edit</button>

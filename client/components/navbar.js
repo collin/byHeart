@@ -21,7 +21,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         />
 </Menu.Item>*/}
       <Menu.Item style={{ fontSize: '1.5em', padding: '0.7em' }}>
-        by<a href="/">❤️</a>
+        by<Link to="/">❤️</Link>
       </Menu.Item>
     </Menu.Menu>
     {isLoggedIn ?
