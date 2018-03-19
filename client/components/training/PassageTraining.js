@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Sticky, Container } from 'semantic-ui-react'
+import { Sticky, Checkbox, Container } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { buildDecimationLevels } from '../../utils/tokenize'
@@ -13,7 +13,8 @@ class PassageTraining extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      decimateLevel: 0
+      decimateLevel: 0,
+      hideHardSpace: true
       //this.props.state.passage.content
     }
   }
@@ -29,15 +30,27 @@ class PassageTraining extends Component {
     this.setState({ decimateLevel: +e.target.value })
   }
 
+  handleToggleHardSpace = () => {
+    this.setState({
+      ...this.state,
+      hideHardSpace: !this.state.hideHardSpace
+    })
+    this.slideBar.focus()
+  }
+
   handlePaginationChange = (e, { decimateLevel }) => this.setState({ decimateLevel })
 
 
   render() {
-    let { contextRef } = this.state
+    let { contextRef, hideHardSpace } = this.state
 
     let content = !this.props.content ? '' :
       this.props.decimateString(this.props.content, this.state.decimateLevel)
 
+      console.log('this.state.hideHardSpace: ', this.state.hideHardSpace)
+    if (this.state.hideHardSpace) {
+      content = content.replace(/_/g, '')
+    }
 
     return (
       <div className="container">
@@ -53,6 +66,7 @@ class PassageTraining extends Component {
                 value={this.state.decimateLevel}
                 ref={(input) => { this.slideBar = input }}
               />
+              <Checkbox label="No space?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
             </div>
           </Sticky>
 

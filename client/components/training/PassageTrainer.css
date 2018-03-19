@@ -16,6 +16,8 @@
     font-family: PancakeFont, FallbackFont, sans-serif;
     color: black;
     line-height: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container {
