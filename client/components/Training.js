@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import PassageTraining from './training/PassageTraining'
@@ -11,13 +11,13 @@ const Training = (props) => {
     <Tab.Pain> <Component /></Tab.Pain> see tab 2 button example.
     */
     {
-      menuItem: 'Passage', render: () => (
+      menuItem: 'Passage', render: () => ( // eslint-disable-line
         <Tab.Pane key="1">
           <PassageTraining />
         </Tab.Pane>)
     },
-    { menuItem: 'Lines', render: () => <Tab.Pane key="2">{<button>this is a button</button>}</Tab.Pane> },
-    { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Tab 3 Content</Tab.Pane> },
+    { menuItem: 'Lines', render: () => <Tab.Pane key="2">{<button>this is a button</button>}</Tab.Pane> }, // eslint-disable-line
+    { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Tab 3 Content</Tab.Pane> }, // eslint-disable-line
   ]
   return (
     <div>
@@ -43,16 +43,16 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-  }
-}
+// const mapDispatch = dispatch => {
+//   return {
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(Training)
+export default connect(mapState)(Training)
 
 /**
  * PROP TYPES
  */
-Training.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
-}
+// Training.propTypes = {
+//   isLoggedIn: PropTypes.bool.isRequired
+// }

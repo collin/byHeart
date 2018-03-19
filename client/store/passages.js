@@ -3,17 +3,28 @@ import { passPassage } from './passage'
 
 const GOT_PASSAGES = 'GOT_PASSAGES'
 const ADD_PASSAGE = 'ADD_PASSAGE'
+const GOT_UPDATED_PASSAGE = 'GOT_UPDATED_PASSAGE'
 
 const initialState = []
+
+/* Action creators */
 
 export const gotPassages = passages => ({
   type: GOT_PASSAGES,
   passages
 })
+
 export const addPassage = passage => ({
   type: ADD_PASSAGE,
   passage
 })
+
+export const gotUpdatedPassage = passage => ({
+  type: GOT_UPDATED_PASSAGE,
+  passage
+})
+
+/* Thunks */
 
 export const fetchPassages = () =>
   dispatch =>
@@ -33,8 +44,23 @@ export const postPassage = (passage) =>
       })
       .catch(err => console.error('posting new passage went wrong', err))
 
+export const updatePassage = (passage) =>
+  dispatch =>
+    axios.put(`/api/passages/${passage.id}`, passage)
+      .then(res => res.data)
+      .then(updatedPassage => {
+        dispatch(gotUpdatedPassage(updatedPassage))
+        dispatch(passPassage(updatedPassage))
+      })
+
+/* Reducer */
+
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case GOT_UPDATED_PASSAGE:
+      state = state.filter(passage => passage.id !== action.passage.id)
+      return [...state, action.passage]
 
     case GOT_PASSAGES:
       return action.passages
