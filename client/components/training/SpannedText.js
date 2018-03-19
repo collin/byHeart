@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { wordHint } from '../../utils/wordHint'
-import './PassageTrainer.css'
+
 import './SpannedText.css'
 import { relative } from 'path'
 import ReactTooltip from 'react-tooltip'
@@ -20,7 +20,7 @@ export class SpannedText extends React.Component {
     this.state = {
       hint: '',
       hintLevel: this.props.decimateLevel,
-      tipDelay: 650
+      tipDelay: 0
     }
     this.mouseOverHint = this.mouseOverHint.bind(this)
     this.mouseOutHandler = this.mouseOutHandler.bind(this)
@@ -31,25 +31,26 @@ export class SpannedText extends React.Component {
 
   spannifyArray(arr) {
     return arr.map((word, i) => {
-      if (word == '<br/>') { return (<br />) }
-      else {
-        return (
-
-          <span
-            key={i} id={i} data-delay-show={this.state.tipDelay} data-for={`hint`}
-            className="wordStyle passageText" style={{ position: relative }
-            } > {word + ' '}
-            <ReactTooltip id={`hint`} effect="solid" place="left" html={true} >
-              {`<h2 className="hintBox"> Hint:   ${this.state.hint} </h2>`}
-            </ReactTooltip>
-          </span>
-        )
-      }
-    })
+      // if (word == '<br/>') { return (<br />) }
+      // else {
+      return (
+        <span
+          key={i} id={i} data-tip data-delay-show={this.state.tipDelay} data-for={`hint`}
+          className="wordStyle passageText" style={{ position: relative }
+          } > {word + ' '}
+          <ReactTooltip id={`hint`} effect="solid" place="left" html={true} >
+            {
+              `<h2 className="hintBox"> <span className='small' >Hint:  </span>   ${this.state.hint} </h2>`
+            }
+          </ReactTooltip>
+        </span>
+      )
+    }
+    )
   }
   mouseOverHint(e) {
     e.stopPropagation()
-    // console.log()
+
     const index = +e.target.id
     //--isWord---//
     const isWord = (Number.isSafeInteger(index) &&
@@ -58,13 +59,14 @@ export class SpannedText extends React.Component {
       typeof this.props.decimateLevel === 'number')
     //---end isWord---//
     if (isWord) {
-      let element = document.getElementById(index)
+
 
       let toBeHint = wordHint(
         this.props.tokenizedPassages,
         this.props.decimateLevel,
         index
       )
+      console.log(toBeHint)
       this.setState({
         hint: toBeHint.hint,
         hintLevel: toBeHint.hintLevel
@@ -75,7 +77,7 @@ export class SpannedText extends React.Component {
 
   mouseOutHandler(e) {
     e.stopPropagation()
-
+    //will need this event to reset the progressive hint information in state.
   }
   render() {
     let content = this.props.tokenizedPassages[this.props.decimateLevel]
@@ -99,8 +101,3 @@ SpannedText.propTypes = {
   tokenizedPassages: PropTypes.arrayOf(PropTypes.array).isRequired
 }
 
-
-// function mouseOverHint(e) {
-//   console.log('hint', this.props.tokenizedPassages[e.target.id])
-
-// }

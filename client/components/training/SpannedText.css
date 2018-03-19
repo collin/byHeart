@@ -9,7 +9,9 @@
 }
 
 .hintBox {
-    /* z-index: 10; */
-    background-color: rgb(206, 168, 241);
-    color: pink
+    font-size: 3em
+}
+
+.hintBox {
+    font-size: .8em
 }
