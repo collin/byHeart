@@ -1,0 +1,25 @@
+.lines {
+  display: inline-block;
+  font-size: 2em;
+  font-family: PancakeFont, FallbackFont, sans-serif;
+  color: black;
+  line-height: 1.5em;
+}
+
+.blurred {
+  filter: blur(3px);
+  color: gray;
+}
+
+.card {
+  padding: 1rem 2rem;
+}
+
+
+button.button-next {
+  background-color: #eee;
+  color: lightgray;
+  font-size: 1.5em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}

@@ -1,5 +1,5 @@
 const Tokenizer = require('sentence-tokenizer')
-const passages = require('../../script/passages')
+// const passages = require('../../script/passages')
 
 const splitTextByNewLine = (text) => {
   return text.split('\n').filter(line => line !== '')
@@ -28,7 +28,7 @@ const normalizeText = (text, targetMax) => {
   return result
 }
 
-const breakIntoLines = (text, targetMax) => {
+const breakIntoLines = (text, targetMax = 75) => {
   let byNewLine = splitTextByNewLine(text)
   let result1 = []
   const tokenized = new Tokenizer()
@@ -51,10 +51,11 @@ const breakIntoLines = (text, targetMax) => {
   return result2
 }
 
-console.log(breakIntoLines(passages[2].content, 75))
+// console.log(breakIntoLines(passages[2].content, 75))
 
 module.exports = {
   splitTextByNewLine,
   splitByWord,
-  normalizeText
+  normalizeText,
+  breakIntoLines
 }
