@@ -24,6 +24,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/train" component={Training} />
         <Route path="/newpassage" component={NewPassage} />
+        <Route exact path="/passages/new" component={NewPassage} />
+        <Route exact path="/passages/:id" component={Training} />
         {
           isLoggedIn &&
           <Switch>
