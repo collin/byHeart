@@ -36,18 +36,18 @@ export default class SpannedText extends React.Component {
   spannifyArray(grid) {
 
     const level = this.props.decimateLevel
-    console.log('idPrefix ', this.props.idPrefix)
+    // console.log('idPrefix ', this.props.idPrefix)
     return grid[level].map((word, i) => {
       const column = grid.map(row => row[i])
-      let id = this.props.idPrefix !== undefined ? '' + this.props.idPrefix + i : i
+      let id = Math.floor((Math.random() * Math.pow(10, 10))).toString(36) + i.toString()
       // onMouseOver={this.mouseOverHint} onMouseOut={this.mouseOutHandler}
       console.log('resulting ID ', id)
       return (
         <span
-          key={id} data-index={id} data-tip data-event="click" data-delay-show="0" data-for={`hint${id}`}
+          key={id} data-tip data-event="click" data-delay-show="0" data-for={`${id}`}
           className="wordStyle passageText" style={{ position: relative }
           } > {word + ' '}
-          <ReactTooltip id={`hint${id}`} effect="solid" place="left" >
+          <ReactTooltip id={`${id}`} effect="solid" place="left" >
             <TipText hintIndex={this.props.decimateLevel} hintArray={column} />
           </ReactTooltip>
         </span>
