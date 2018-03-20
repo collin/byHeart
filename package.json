@@ -46,6 +46,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.3.0",
     "semantic-ui-react": "^0.78.3",
+    "sentence-tokenizer": "^1.0.0",
     "sequelize": "^4.3.1",
     "socket.io": "^2.0.3"
   },

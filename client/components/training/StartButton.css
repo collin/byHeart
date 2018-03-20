@@ -1,0 +1,12 @@
+button.start {
+  background-color: blue;
+  color: white;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+div.button-wrapper {
+  margin: 2rem auto;
+  text-align: center;
+}
