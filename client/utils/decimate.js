@@ -1,7 +1,7 @@
 const piDigits = require('./pi-digits')
 const whiteSpace = ' \t\n'
 const excludedCharacters = '`~!@#$%^&*()-_=+[{]}\\|;:\'"“‘’”,<.>/?` \t\n'
-
+import { tokenizePassage } from './tokenize'
 const markStringForDecimation = (text) => {
   text = text.trim()
   if (text.length <= 1) return text
@@ -15,9 +15,11 @@ const markStringForDecimation = (text) => {
       markedText += '#'
     } else if (excludedCharacters.indexOf(text[i - 1]) > -1 && excludedCharacters.indexOf(text[i]) === -1) {
       markedText += '#'
-    } else {(
-      markedText += piDigits[ (i + text.length) % piDigits.length ]
-    )}
+    } else {
+      (
+        markedText += piDigits[(i + text.length) % piDigits.length]
+      )
+    }
   }
 
   return markedText
@@ -36,5 +38,12 @@ const decimateString = (text, rate = 10) => {
 
   return decimatedText
 }
+function buildDecimationLevelArrays(stringPassage, levels = 10) {
 
-module.exports = { decimateString }
+  const decimatedArrays = [tokenizePassage(stringPassage)]
+  for (let i = 1; i <= levels; i++) {
+    decimatedArrays.push(tokenizePassage(decimateString(stringPassage, i)))
+  }
+  return decimatedArrays
+}
+module.exports = { decimateString, buildDecimationLevelArrays }

@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import PassageTraining from './training/PassageTraining'
+import LineByLineTrainer from './training/LineByLineTrainer'
 import './Training.css'
 const Training = (props) => {
 
@@ -16,7 +17,7 @@ const Training = (props) => {
           <PassageTraining />
         </Tab.Pane>)
     },
-    { menuItem: 'Lines', render: () => <Tab.Pane key="2">{<button>this is a button</button>}</Tab.Pane> }, // eslint-disable-line
+    { menuItem: 'Lines', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> }, // eslint-disable-line
     { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Tab 3 Content</Tab.Pane> }, // eslint-disable-line
   ]
   return (
@@ -43,10 +44,6 @@ const mapState = state => {
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {
-//   }
-// }
 
 export default connect(mapState)(Training)
 

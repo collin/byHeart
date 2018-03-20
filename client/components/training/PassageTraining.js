@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Sticky, Checkbox, Container } from 'semantic-ui-react'
+import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
-import { buildDecimationLevels } from '../../utils/tokenize'
 import TextWithLineBreaks from './TextWithLineBreaks'
+
 // import { Link } from 'react-router-dom'
 // import { logout } from '../store'
 
@@ -45,9 +45,9 @@ class PassageTraining extends Component {
     let { contextRef, hideHardSpace } = this.state
 
     let content = !this.props.content ? '' :
-      this.props.decimateString(this.props.content, this.state.decimateLevel)
+      this.props.content
 
-      console.log('this.state.hideHardSpace: ', this.state.hideHardSpace)
+
     if (this.state.hideHardSpace) {
       content = content.replace(/_/g, '')
     }
@@ -71,7 +71,7 @@ class PassageTraining extends Component {
           </Sticky>
 
           <div className="passageText">
-            <TextWithLineBreaks text={content} />
+            <TextWithLineBreaks text={content} decimateLevel={this.state.decimateLevel} />
           </div>
         </div>
       </div>
@@ -91,8 +91,7 @@ const mapState = state => {
 
 const mapDispatch = () => {
   return {
-    decimateString: (text, level) => decimateString(text, level),
-    buildDecimationLevels: (text, level) => buildDecimationLevels(text, level),
+    decimateString: (text, level) => decimateString(text, level)
   }
 }
 
