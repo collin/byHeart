@@ -39,6 +39,7 @@ export const postPassage = (passage) =>
     axios.post('/api/passages', passage)
       .then(res => res.data)
       .then(newPassage => {
+        // REVIEW - What's happening here? OK that they're dispatched concurrently?
         dispatch(addPassage(newPassage))
         dispatch(passPassage(newPassage))
       })

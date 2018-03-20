@@ -23,6 +23,7 @@ class PassageTraining extends Component {
     this.slideBar.focus()
   }
 
+  // REVIEW - What are you doing with the contextRef?
   handleContextRef = contextRef => {
     this.setState({ contextRef })
   }

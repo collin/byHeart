@@ -15,6 +15,7 @@ const Passage = require('./passage')
  * instead of: const User = require('../db/models/user')
  */
 
+// REVIEW - What is the reader model?
 Passage.belongsToMany(User, { through: 'reader' })
 User.hasOne(Passage, { as: 'author' })
 
