@@ -40,6 +40,7 @@ export const fetchPassage = (id) =>
       .then(res => res.data)
       .then(passage => {
         dispatch(gotUpdatedPassage(passage))
+        dispatch(passPassage(passage))
       })
 
 export const postPassage = (passage) =>
