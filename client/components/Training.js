@@ -44,10 +44,6 @@ const mapState = state => {
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {
-//   }
-// }
 
 export default connect(mapState)(Training)
 
