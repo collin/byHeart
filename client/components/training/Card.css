@@ -1,5 +1,4 @@
 .lines {
-  display: inline-block;
   font-size: 2em;
   font-family: PancakeFont, FallbackFont, sans-serif;
   color: black;

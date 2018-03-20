@@ -2,7 +2,7 @@ import React from 'react'
 
 const Finished = (props) => {
   return (
-    <button>finished</button>
+    <div>You completed the passage in {props.time} milliseconds</div>
   )
 }
 

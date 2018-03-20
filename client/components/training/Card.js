@@ -9,7 +9,7 @@ const Card = (props) => {
       <div id="current-line" className="lines">{currentLine}</div>
       <div id="line-below" className="lines blurred">{lineBelow}</div>
       <div className="button-wrapper">
-        <button className="button-next" onKeyPress={(event) => {next(event)}}>Next</button>
+        <button className="button-next" onClick={next}>Next</button>
       </div>
     </div>
   )

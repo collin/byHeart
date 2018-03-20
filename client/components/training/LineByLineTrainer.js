@@ -7,9 +7,13 @@ import Card from './Card'
 import StartButton from './StartButton'
 import Finished from './Finished'
 
-const TRAINING = 'TRAINING'
-const FINISHED = 'FINISHED'
 const WAITING_TO_BEGIN = 'WAITING_TO_BEGIN'
+const TRAINING  = 'TRAINING'
+const FINISHED  = 'FINISHED'
+const PREVIOUS  = 'ArrowLeft'
+const NEXT      = 'ArrowRight'
+const HARDER    = 'ArrowDown'
+const EASIER    = 'ArrowUp'
 
 class LineByLineTrainer extends Component {
   constructor(props) {
@@ -20,9 +24,26 @@ class LineByLineTrainer extends Component {
       status: WAITING_TO_BEGIN,
       timeStarted: null,
       timeFinished: null,
+      lastKeyPressed: null
     }
     this.startTraining = this.startTraining.bind(this)
     this.nextCard = this.nextCard.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+  }
+
+  handleKeyPress(event) {
+    if (event.code === NEXT) this.nextCard()
+    else if (event.code === PREVIOUS) this.previousCard()
+    else if (event.code === HARDER) this.makeHarder()
+    else if (event.code === EASIER) this.makeEasier()
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyPress, true)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyPress, true)
   }
 
   startTraining() {
@@ -30,18 +51,59 @@ class LineByLineTrainer extends Component {
       ...this.state,
       currentLineIndex: 0,
       status: TRAINING,
-      timeStarted: Date.now()
+      timeStarted: Date.now(),
+      timeFinished: null
     })
   }
 
-  nextCard(event) {
-    console.log('event: ', event)
+  nextCard() {
+    if (this.state.status === TRAINING) {
+      const currentLineIndex = this.state.currentLineIndex + 1
+      const numOfLines = breakIntoLines(this.props.passage.content).length
+      if (currentLineIndex < numOfLines) {
+        this.setState({
+          ...this.state,
+          currentLineIndex
+        })
+      } else {
+        this.setState({
+          ...this.state,
+          timeFinished: Date.now(),
+          status: FINISHED
+        })
+      }
+    }
+  }
+
+  previousCard() {
     if (this.state.status === TRAINING) {
       const currentLineIndex = this.state.currentLineIndex
-      const numOfLines = breakIntoLines(this.props.passage.length)
+      const numOfLines = breakIntoLines(this.props.passage.content).length
+      if (currentLineIndex > 0) {
+        this.setState({
+          ...this.state,
+          currentLineIndex: (currentLineIndex - 1) % numOfLines
+        })
+      }
+    }
+  }
+
+  makeEasier() {
+    const decimationLevel = this.state.decimationLevel
+    if (decimationLevel > 0) {
       this.setState({
         ...this.state,
-        currentLineIndex: (currentLineIndex + 1) % numOfLines
+        decimationLevel: decimationLevel - 1
+      })
+    }
+  }
+
+  makeHarder() {
+    const decimationLevel = this.state.decimationLevel
+    if (decimationLevel < 10) {
+      this.setState({
+        ...this.state,
+        decimationLevel: decimationLevel + 1
       })
     }
   }
@@ -71,7 +133,7 @@ class LineByLineTrainer extends Component {
           />
         )
       case FINISHED:
-        return <Finished />
+        return <Finished time={this.state.timeFinished - this.state.timeStarted} />
       default:
         return <div>Something went wrong</div>
     }
