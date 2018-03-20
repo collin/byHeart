@@ -11,7 +11,6 @@ export class Training extends Component {
   componentDidMount() {
     if (this.props.match) {
       this.props.loadInitialData(this.props.match.params.id)
-      console.log('this.props.match.params.id: ', this.props.match.params.id)
     }
   }
 

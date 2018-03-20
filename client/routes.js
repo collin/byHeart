@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, Profile, NewPassage, Training, LandingPage } from './components'
+import { Login, Signup, Profile, NewPassage, Training, LandingPage, PassageForm } from './components'
 import { me, fetchPassages } from './store'
 
 /**
@@ -22,10 +22,11 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/train/:id" component={Training} />
         <Route path="/train" component={Training} />
         <Route path="/newpassage" component={NewPassage} />
         <Route exact path="/passages/new" component={NewPassage} />
-        <Route exact path="/passages/:id" component={Training} />
+        <Route exact path="/passages/:id/edit" component={PassageForm} />
         {
           isLoggedIn &&
           <Switch>
