@@ -3,26 +3,28 @@ import { connect } from 'react-redux'
 import { gotPassage } from '../store/passage'
 import history from '../history'
 import { Button, Container, Header, Grid, Segment, Card } from 'semantic-ui-react'
+import { decimateString } from '../utils/decimate'
 import './LandingPage.css'
 
 
 const card1 = [
   'Qurious how it works? For a quick start press Try An Example and train memorizing a sonet.',
 ]
-const card2 = ['Chose full text or line-by-line view']
 
 class LandingPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      index: 0
+      indexHeart: 0,
+      indexTag: 0
     }
   }
 
   componentDidMount() {
     setInterval(() => {
       this.setState({
-        index: (this.state.index + 1) % 7
+        indexHeart: (this.state.indexHeart + 1) % 7,
+        indexTag: (this.state.indexTag + 1) % 8
       })
     }, 1200)
   }
@@ -31,6 +33,8 @@ class LandingPage extends Component {
     const { passages, handleTrainPassage, handleStartPassage } = this.props
     const firstPassage = passages.filter(passage => passage.id === 1)
     const heartHeading = ['By Heart', 'By Hear', 'By Hea', 'By He', 'By H', 'By ', 'By ❤️']
+    const str = "It doesn't have to be hard to learn your lines"
+    const tagLineTwo = decimateString(str, this.state.indexTag * 1.6)
 
     return (
       <Segment textAlign="center" style={{ minHeight: 700 }} vertical>
@@ -40,19 +44,20 @@ class LandingPage extends Component {
               <Header
                 id="tagLine"
                 as="h2"
-                content="It doesn't have to be hard to learn your lines"
+                content={tagLineTwo}
               />
               <Header
                 id="heartHeader"
                 as="h1"
-                content={heartHeading[this.state.index]}
+                content={heartHeading[this.state.indexHeart]}
               />
               <Button.Group style={{ marginBottom: '1em' }}>
                 <Button onClick={handleStartPassage} basic color="purple">Get Started</Button>
                 <Button.Or />
                 {
-                  firstPassage &&
+                  firstPassage ?
                   <Button onClick={() => { handleTrainPassage(firstPassage[0]) }} basic color="purple">Try An Example</Button>
+                  : null
                 }
               </Button.Group>
             </Container>
