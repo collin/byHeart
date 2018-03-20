@@ -22,7 +22,7 @@ export default class SpannedText extends React.Component {
       tipDelay: 0,
       decimateLevels: buildDecimationLevelArrays(this.props.content)
     }
-    this.mouseOverHint = this.mouseOverHint.bind(this)
+    // this.mouseOverHint = this.mouseOverHint.bind(this)
     this.mouseOutHandler = this.mouseOutHandler.bind(this)
     this.spannifyArray = this.spannifyArray.bind(this)
 
