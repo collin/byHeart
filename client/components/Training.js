@@ -43,18 +43,6 @@ const mapState = state => {
   }
 }
 
-<<<<<<< HEAD
-const mapDispatch = dispatch => {
-  return {
-
-  }
-}
-=======
-// const mapDispatch = dispatch => {
-//   return {
-//   }
-// }
->>>>>>> master
 
 export default connect(mapState)(Training)
 

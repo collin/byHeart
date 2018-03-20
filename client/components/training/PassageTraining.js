@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Sticky, Checkbox, Container } from 'semantic-ui-react'
+import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import { decimateString } from '../../utils/decimate'
-import { buildDecimationLevels } from '../../utils/tokenize'
-import { SpannedText } from './SpannedText'
 import TextWithLineBreaks from './TextWithLineBreaks'
+
 // import { Link } from 'react-router-dom'
 // import { logout } from '../store'
 
@@ -15,17 +14,8 @@ class PassageTraining extends Component {
     super(props)
     this.state = {
       decimateLevel: 0,
-      decimatedArrays: [[]],
-      hideHardSpace: true,
+      hideHardSpace: true
       //this.props.state.passage.content
-    }
-  }
-  componentDidMount() {
-
-    if (this.props.content) {
-
-      const decimatedArrays = buildDecimationLevels(this.props.content)
-      this.setState({ decimatedArrays })
     }
   }
 
@@ -54,10 +44,10 @@ class PassageTraining extends Component {
   render() {
     let { contextRef, hideHardSpace } = this.state
 
-    // let content = !this.props.content ? '' :
-    //   this.props.decimateString(this.props.content, this.state.decimateLevel)
+    let content = !this.props.content ? '' :
+      this.props.content
 
-    console.log('this.state.hideHardSpace: ', this.state.hideHardSpace)
+
     if (this.state.hideHardSpace) {
       content = content.replace(/_/g, '')
     }
@@ -80,13 +70,9 @@ class PassageTraining extends Component {
             </div>
           </Sticky>
 
-
-          <SpannedText tokenizedPassages={this.state.decimatedArrays} decimateLevel={this.state.decimateLevel} />
-          {
-            // <div className="passageText">
-            //   <TextWithLineBreaks text={content} />
-            // </div>
-          }
+          <div className="passageText">
+            <TextWithLineBreaks text={content} decimateLevel={this.state.decimateLevel} />
+          </div>
         </div>
       </div>
     )
@@ -105,16 +91,15 @@ const mapState = state => {
 
 const mapDispatch = () => {
   return {
-    decimateString: (text, level) => decimateString(text, level),
-    buildDecimationLevels: (text, level) => buildDecimationLevels(text, level),
+    decimateString: (text, level) => decimateString(text, level)
   }
 }
 
 export default connect(mapState, mapDispatch)(PassageTraining)
 
-    /**
-     * PROP TYPES
-     */
+/**
+ * PROP TYPES
+ */
 // PassageTraining.propTypes = {
 
 // }

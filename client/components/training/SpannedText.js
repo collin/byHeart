@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { wordHint } from '../../utils/wordHint'
-
+import { buildDecimationLevelArrays } from '../../utils/decimate'
 import './SpannedText.css'
 import { relative } from 'path'
 import ReactTooltip from 'react-tooltip'
-
-export class SpannedText extends React.Component {
+import TipText from './TipText'
+export default class SpannedText extends React.Component {
   constructor(props) {
     super(props)
 
@@ -18,9 +18,9 @@ export class SpannedText extends React.Component {
     //mouse out propagates, and will remove the timer on this.currentTimer
     // remove the tool tip and set visible to null.
     this.state = {
-      hint: '',
       hintLevel: this.props.decimateLevel,
-      tipDelay: 0
+      tipDelay: 0,
+      decimateLevels: buildDecimationLevelArrays(this.props.content)
     }
     this.mouseOverHint = this.mouseOverHint.bind(this)
     this.mouseOutHandler = this.mouseOutHandler.bind(this)
@@ -28,20 +28,26 @@ export class SpannedText extends React.Component {
 
   }
 
+  componentDidMount() {
+    // const decimateLevels = buildDecimationLevelArrays(content)
 
-  spannifyArray(arr) {
-    return arr.map((word, i) => {
-      // if (word == '<br/>') { return (<br />) }
-      // else {
+  }
+  spannifyArray(grid) {
+
+    const level = this.props.decimateLevel
+    console.log('idPrefix ', this.props.idPrefix)
+    return grid[level].map((word, i) => {
+      const column = grid.map(row => row[i])
+      let id = this.props.idPrefix !== undefined ? '' + this.props.idPrefix + i : i
+      // onMouseOver={this.mouseOverHint} onMouseOut={this.mouseOutHandler}
+      console.log('resulting ID ', id)
       return (
         <span
-          key={i} id={i} data-tip data-delay-show={this.state.tipDelay} data-for={`hint`}
+          key={id} data-index={id} data-tip data-event="click" data-delay-show="1000" data-for={`hint${id}`}
           className="wordStyle passageText" style={{ position: relative }
           } > {word + ' '}
-          <ReactTooltip id={`hint`} effect="solid" place="left" html={true} >
-            {
-              `<h2 className="hintBox"> <span className='small' >Hint:  </span>   ${this.state.hint} </h2>`
-            }
+          <ReactTooltip id={`hint${id}`} effect="solid" place="left" >
+            <TipText hintIndex={this.props.decimateLevel} hintArray={column} />
           </ReactTooltip>
         </span>
       )
@@ -50,28 +56,26 @@ export class SpannedText extends React.Component {
   }
   mouseOverHint(e) {
     e.stopPropagation()
-
     const index = +e.target.id
     //--isWord---//
-    const isWord = (Number.isSafeInteger(index) &&
-      Array.isArray(this.props.tokenizedPassages) &&
-      Array.isArray(this.props.tokenizedPassages) &&
-      typeof this.props.decimateLevel === 'number')
+    const isWord = (Number.isInteger(index) &&
+      Array.isArray(this.state.decimateLevels) &&
+      Array.isArray(this.state.decimateLevels[this.props.decimateLevel])) &&
+      this.state.decimateLevels[this.props.decimateLevel][index]
     //---end isWord---//
     if (isWord) {
 
-
       let toBeHint = wordHint(
-        this.props.tokenizedPassages,
+        this.state.decimateLevels,
         this.props.decimateLevel,
         index
       )
-      console.log(toBeHint)
+      console.log('hint after', this.state.hint)
       this.setState({
         hint: toBeHint.hint,
         hintLevel: toBeHint.hintLevel
       })
-
+      console.log('hint after', this.state.hint)
     }
   }
 
@@ -80,16 +84,24 @@ export class SpannedText extends React.Component {
     //will need this event to reset the progressive hint information in state.
   }
   render() {
-    let content = this.props.tokenizedPassages[this.props.decimateLevel]
 
-    return (
-      <div className="passageText" onMouseOver={this.mouseOverHint} onMouseOut={this.mouseOutHandler}>
+    let { content, decimateLevel } = this.props
+    if (content !== '') {
+
+      content = this.state.decimateLevels[decimateLevel].join(' ')
+
+
+    }
+
+    return (content === '' ? null : (
+      <div className="passageText" >
         {
-          this.spannifyArray(content)
+          this.spannifyArray(this.state.decimateLevels)
+
         }
 
       </div>
-    )
+    ))
   }
 }
 
@@ -98,6 +110,6 @@ export class SpannedText extends React.Component {
  */
 SpannedText.propTypes = {
   decimateLevel: PropTypes.number.isRequired,
-  tokenizedPassages: PropTypes.arrayOf(PropTypes.array).isRequired
+  // content: PropTypes.string.isRequired
 }
 
