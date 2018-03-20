@@ -8,12 +8,14 @@ import StartButton from './StartButton'
 import Finished from './Finished'
 
 const WAITING_TO_BEGIN = 'WAITING_TO_BEGIN'
-const TRAINING  = 'TRAINING'
-const FINISHED  = 'FINISHED'
-const PREVIOUS  = 'ArrowLeft'
-const NEXT      = 'ArrowRight'
-const HARDER    = 'ArrowDown'
-const EASIER    = 'ArrowUp'
+const TRAINING = 'TRAINING'
+const FINISHED = 'FINISHED'
+const PREVIOUS = 'ArrowLeft'
+const NEXT = 'ArrowRight'
+const HARDER = 'ArrowDown'
+const EASIER = 'ArrowUp'
+const START = 'Enter'
+const MOVE = 'Space'
 
 class LineByLineTrainer extends Component {
   constructor(props) {
@@ -29,6 +31,9 @@ class LineByLineTrainer extends Component {
     this.startTraining = this.startTraining.bind(this)
     this.nextCard = this.nextCard.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.makeHarder = this.makeHarder.bind(this)
+    this.startHarder = this.startHarder.bind(this)
+    this.startEasier = this.startEasier.bind(this)
   }
 
   handleKeyPress(event) {
@@ -36,6 +41,10 @@ class LineByLineTrainer extends Component {
     else if (event.code === PREVIOUS) this.previousCard()
     else if (event.code === HARDER) this.makeHarder()
     else if (event.code === EASIER) this.makeEasier()
+    else if (event.code === START && this.state.status === WAITING_TO_BEGIN) this.startTraining()
+    else if (event.code === START && this.state.status === TRAINING) this.nextCard()
+    else if (event.code === MOVE && this.state.status === WAITING_TO_BEGIN) this.startTraining()
+    else if (event.code === MOVE && this.state.status === TRAINING) this.nextCard()
   }
 
   componentDidMount() {
@@ -108,6 +117,20 @@ class LineByLineTrainer extends Component {
     }
   }
 
+  startHarder() {
+    this.makeHarder()
+    setTimeout(() => {
+      this.startTraining()
+    }, 1)
+  }
+
+  startEasier() {
+    this.makeEasier()
+    setTimeout(() => {
+      this.startTraining()
+    }, 1)
+  }
+
   render() {
     const { decimationLevel, currentLineIndex, status } = this.state
     const { passage } = this.props
@@ -133,7 +156,7 @@ class LineByLineTrainer extends Component {
           />
         )
       case FINISHED:
-        return <Finished time={this.state.timeFinished - this.state.timeStarted} />
+        return <Finished startHarder={this.startHarder} startEasier={this.startEasier} startOver={this.startTraining} time={this.state.timeFinished - this.state.timeStarted} />
       default:
         return <div>Something went wrong</div>
     }
