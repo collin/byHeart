@@ -12,7 +12,7 @@ const TextWithLineBreaks = (props) => {
         return (
           <div key={key++}>
             <SpannedText
-              content={line.trim()} decimateLevel={props.decimateLevel} idPrefix={key}
+              content={line.trim()} decimateLevel={props.decimateLevel}
             />
           </div>
         )
