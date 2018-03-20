@@ -43,7 +43,7 @@ export default class SpannedText extends React.Component {
       console.log('resulting ID ', id)
       return (
         <span
-          key={id} data-index={id} data-tip data-event="click" data-delay-show="1000" data-for={`hint${id}`}
+          key={id} data-index={id} data-tip data-event="click" data-delay-show="0" data-for={`hint${id}`}
           className="wordStyle passageText" style={{ position: relative }
           } > {word + ' '}
           <ReactTooltip id={`hint${id}`} effect="solid" place="left" >
