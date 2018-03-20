@@ -54,30 +54,19 @@ export default class SpannedText extends React.Component {
     }
     )
   }
-  mouseOverHint(e) {
-    e.stopPropagation()
-    const index = +e.target.id
-    //--isWord---//
-    const isWord = (Number.isInteger(index) &&
-      Array.isArray(this.state.decimateLevels) &&
-      Array.isArray(this.state.decimateLevels[this.props.decimateLevel])) &&
-      this.state.decimateLevels[this.props.decimateLevel][index]
-    //---end isWord---//
-    if (isWord) {
+  // mouseOverHint(e) {
+  //   e.stopPropagation()
+  //   const index = +e.target.id
+  //   //--isWord---//
+  //   const isWord = (Number.isInteger(index) &&
+  //     Array.isArray(this.state.decimateLevels) &&
+  //     Array.isArray(this.state.decimateLevels[this.props.decimateLevel])) &&
+  //     this.state.decimateLevels[this.props.decimateLevel][index]
+  //   //---end isWord---//
+  //   if (isWord) {
 
-      let toBeHint = wordHint(
-        this.state.decimateLevels,
-        this.props.decimateLevel,
-        index
-      )
-      console.log('hint after', this.state.hint)
-      this.setState({
-        hint: toBeHint.hint,
-        hintLevel: toBeHint.hintLevel
-      })
-      console.log('hint after', this.state.hint)
-    }
-  }
+  //   }
+  // }
 
   mouseOutHandler(e) {
     e.stopPropagation()
