@@ -27,4 +27,8 @@ describe('decimateString', () => {
   it('should remove all letters except for the first letters of every word if percentage is 100', () => {
     expect(decimateString(text, 10)).to.equal('S_ s____ I l___, s________ t___ a__ t___,')
   })
+
+  it('should remove hard spaces if hideHardSpace is set to true', () => {
+    expect(decimateString('I will move heaven and earth', 10, true )).to.equal('I w m h a e')
+  })
 })

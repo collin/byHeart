@@ -25,7 +25,12 @@ const markStringForDecimation = (text) => {
   return markedText
 }
 
-const decimateString = (text, rate = 10) => {
+const decimateString = (text, rate = 10, hideHardSpace = false) => {
+
+  rate = Math.floor(+rate)
+  if (rate < 0) rate = 0
+  else if (rate > 10) rate = 10
+
   const markedText = markStringForDecimation(text)
   let decimatedText = ''
   text = text.trim()
@@ -36,8 +41,13 @@ const decimateString = (text, rate = 10) => {
     decimatedText += (value < rate) ? '_' : text[i]
   }
 
+  if (hideHardSpace) {
+    decimatedText = decimatedText.replace(/_/g, '')
+  }
+
   return decimatedText
 }
+
 function buildDecimationLevelArrays(stringPassage, levels = 10) {
 
   const decimatedArrays = [tokenizePassage(stringPassage)]

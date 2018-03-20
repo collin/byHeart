@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
-import { decimateString } from '../../utils/decimate'
+// import { decimateString } from '../../utils/decimate'
 import TextWithLineBreaks from './TextWithLineBreaks'
 
 // import { Link } from 'react-router-dom'
@@ -89,13 +89,13 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = () => {
-  return {
-    decimateString: (text, level) => decimateString(text, level)
-  }
-}
+// const mapDispatch = () => {
+//   return {
+//     decimateString: (text, level, hideHardSpace) => decimateString(text, level, hideHardSpace)
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(PassageTraining)
+export default connect(mapState)(PassageTraining)
 
 /**
  * PROP TYPES
