@@ -70,7 +70,7 @@ class PassageTraining extends Component {
             </div>
           </Sticky>
 
-          <div className="passageText">
+          <div className="passageTextContainer">
             <TextWithLineBreaks text={content} decimateLevel={this.state.decimateLevel} />
           </div>
         </div>
