@@ -7,7 +7,7 @@ function zeroPad(number, size = 2) {
   return str
 }
 
-function timeFormat(miliseconds) {
+export default function timeFormat(miliseconds) {
   const hh = parseInt((miliseconds / (1000 * 60 * 60)) % 24, 10)
   const mm = parseInt((miliseconds / (1000 * 60)) % 60, 10)
   const ss = parseInt((miliseconds / 1000) % 60, 10)
@@ -16,4 +16,3 @@ function timeFormat(miliseconds) {
   return `${zeroPad(hh)}:${zeroPad(mm)}:${zeroPad(ss)}:${mss}`
 }
 
-console.log(timeFormat(60000))
