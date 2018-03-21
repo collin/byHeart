@@ -17,7 +17,7 @@ export class Profile extends Component {
     const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
     return (
-      <div className="main">
+      <div className="profile">
         <h1>My Profile</h1>
         <div className="passage-cards">
           <Card.Group itemsPerRow={3}>
