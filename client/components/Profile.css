@@ -1,0 +1,33 @@
+/* .ProfileDiv {
+  background-color: lightgray;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+} */
+div.main {
+  padding: 2vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+}
+
+div.passage-cards {
+  display: flex;
+  padding: 0 0 0 0;
+  flex-wrap: wrap;
+}
+
+div.card {
+  margin: 0 0 2vw 0;
+  background-color: white;
+  width: 30%;
+  padding: 1vw;
+  margin-right: 1vw;
+}
+
+h1 {
+  position: relative;
+  text-align: center;
+}

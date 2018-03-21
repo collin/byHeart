@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages } from '../store/'
+import { Card, Button } from 'semantic-ui-react'
 import history from '../history'
+import './Profile.css'
 
 export class Profile extends Component {
 
@@ -10,26 +12,31 @@ export class Profile extends Component {
     this.props.loadInitialData()
   }
 
-  render () {
+  render() {
     const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage } = this.props
     const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
     return (
-      <div>
+      <div className="main">
         <h1>My Profile</h1>
-        <button onClick={handleNewPassage}>New Passage</button>
-        <ul>
+        <Card.Group className="passage-cards" itemsPerRow={2}>
           {filteredPassages && filteredPassages.map(passage => {
             return (
-              <li key={`passage-${passage.id}`}>
-                {passage.title}
-                <button onClick={() => {handleTrainPassage(passage)}}>Train</button>
-                <button onClick={() => {handleEditPassage(passage)}}>Edit</button>
-                <button>Delete</button>
-              </li>
+              <Card key={`passage-${passage.id}`} className="card" basic color="purple">
+                <Card.Content header={passage.title} />
+                <Card.Content description={passage.content.slice(0, 40).concat('(...)')} />
+                <Card.Content extra>
+                  <Button onClick={() => { handleTrainPassage(passage) }}>Train</Button>
+                  <Button onClick={() => { handleEditPassage(passage) }}>Edit</Button>
+                  <Button>Delete</Button>
+                </Card.Content>
+              </Card>
             )
           })}
-        </ul>
+        </Card.Group>
+        <div>
+          <Button onClick={handleNewPassage}>New Passage</Button>
+        </div>
       </div>
     )
   }
