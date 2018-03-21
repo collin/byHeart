@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages } from '../store/'
-import { Card, Button, Icon, Label, Popup, Container, Segment } from 'semantic-ui-react'
+import { Card, Button, Icon, Label, Popup } from 'semantic-ui-react'
 import history from '../history'
 import './Profile.css'
 
@@ -15,7 +15,7 @@ export class Profile extends Component {
   render() {
     const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage } = this.props
     const filteredPassages = passages.filter(passage => passage.authorId === user.id)
-    filteredPassages && console.log(filteredPassages)
+
     return (
       <div className="main">
         <h1>My Profile</h1>
@@ -41,11 +41,11 @@ export class Profile extends Component {
                         <Icon name="delete" size="small" />
                       </Button.Content>
                     </Button>
-                    <Card.Header style={{overflowWrap: 'break-word'}}>
+                    <Card.Header style={{overflowWrap: 'break-word', padding: '0.5em'}}>
                         {passage.title}
                     </Card.Header>
                     <Card.Description style={{overflowWrap: 'break-word'}}>
-                      {passage.content.slice(0, 40).concat('(...)')}
+                      {passage.content.slice(0, 80).concat('(...)')}
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
