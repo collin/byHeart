@@ -7,7 +7,7 @@ addons:
   postgresql: '9.6' # highest available postgres version on Travis
   chrome: stable
 dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+sudo: required # when on trusty, uses Docker containers for speed
 notifications:
   email:
     on_success: change # default: change (only when going from broken to fixed)
