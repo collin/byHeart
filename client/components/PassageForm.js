@@ -25,6 +25,8 @@ class PassageForm extends Component {
       } else if (!this.props.passage.content) {
         history.push('/passages/new')
       }
+    } else if (this.props.match.path === '/newpassage') {
+      history.push('/passages/new')
     }
   }
 
