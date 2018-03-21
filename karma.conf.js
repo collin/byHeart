@@ -15,7 +15,6 @@ module.exports = function(config) {
 
     preprocessors: {
       'client/**/*.spec.js': ['webpack'],
-      'client/**/*.spec.js': ['webpack'],
     },
 
     webpack: {
@@ -33,5 +32,5 @@ module.exports = function(config) {
         includeStack: true,
       },
     },
-  });
-};
+  })
+}
