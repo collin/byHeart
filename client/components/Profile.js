@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { gotPassage, fetchPassages } from '../store/'
 import { Card, Button, Icon, Label, Popup } from 'semantic-ui-react'
 import history from '../history'
-import './Profile.css'
 
 export class Profile extends Component {
 
@@ -96,8 +95,9 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleNewPassage() {
+      event.preventDefault()
       dispatch(gotPassage({}))
-      history.push('/passage/new')
+      history.push('/newpassage')
     },
     handleEditPassage(passage) {
       dispatch(gotPassage(passage))
