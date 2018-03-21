@@ -1,10 +1,12 @@
 const path = require('path')
 const webpackConfig = require('./webpack.config.js')
 
+const IS_TRAVIS = process.env.TRAVIS
+
 module.exports = function(config) {
   config.set({
     singleRun: true,
-    browsers: ['Chrome'],
+    browsers: IS_TRAVIS ? ['HeadlessChrome'] : ['Chrome'],
     frameworks: ['mocha', 'chai'],
 
     files: [
@@ -30,6 +32,20 @@ module.exports = function(config) {
       },
       chai: {
         includeStack: true,
+      },
+    },
+
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--no-sandbox',
+          '--headless',
+          '--disable-gpu',
+          '--disable-translate',
+          '--disable-extensions',
+          '--remote-debugging-port=9222', // Without a remote debugging port, Google Chrome exits immediately.
+        ],
       },
     },
   })
