@@ -46,11 +46,11 @@ const mapDispatch = (dispatch) => {
   return {
     handleNewPassage() {
       dispatch(gotPassage({}))
-      history.push('/newpassage')
+      history.push('/passage/new')
     },
     handleEditPassage(passage) {
       dispatch(gotPassage(passage))
-      history.push(`/passage/${passage.id}/edit`)
+      history.push(`/passages/${passage.id}/edit`)
     },
     handleTrainPassage(passage) {
       dispatch(gotPassage(passage))

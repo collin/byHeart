@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import { fetchPassage } from '../store'
 import PassageTraining from './training/PassageTraining'
 import LineByLineTrainer from './training/LineByLineTrainer'
 import './Training.css'
+import history from '../history'
+
 
 export class Training extends Component {
-  componentDidMount() {
-    if (this.props.match) {
+
+  componentWillMount() {
+    if (this.props.match && this.props.match.params.id) {
       this.props.loadInitialData(this.props.match.params.id)
+    } else if (!this.props.content) {
+      history.push('/passages/new')
     }
   }
 
   render () {
-    const panes = [
+    const panes = this.props.content && [
       /* when we add other views such as lines, just add the comonents between
       <Tab.Pain> <Component /></Tab.Pain> see tab 2 button example.
       */
@@ -50,6 +54,7 @@ export class Training extends Component {
 const mapState = state => {
   return {
     title: state.passage.title,
+    content: state.passage.content,
     isLoggedIn: !!state.user.id
   }
 }
@@ -62,12 +67,5 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-
 export default connect(mapState, mapDispatch)(Training)
 
-/**
- * PROP TYPES
- */
-// Training.propTypes = {
-//   isLoggedIn: PropTypes.bool.isRequired
-// }

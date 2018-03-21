@@ -25,7 +25,7 @@ class Routes extends Component {
         <Route exact path="/train/:id" component={Training} />
         <Route path="/train" component={Training} />
         <Route path="/newpassage" component={NewPassage} />
-        <Route exact path="/passages/new" component={NewPassage} />
+        <Route exact path="/passages/new" component={PassageForm} />
         <Route exact path="/passages/:id/edit" component={PassageForm} />
         {
           isLoggedIn &&
