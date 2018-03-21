@@ -19,9 +19,9 @@
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test-client": "karma start",
     "test-client-watch": "karma start --no-single-run",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js --require @babel/polyfill --require @babel/register",
-    "test-watch": "NODE_ENV='test' mocha -w ./server/**/*.spec.js ./server/**/**/*.spec.js --require @babel/polyfill --require @babel/register",
-    "test-all": "npm run test && npm run test-client"
+    "test-server": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js --require @babel/polyfill --require @babel/register",
+    "test-server-watch": "NODE_ENV='test' mocha -w ./server/**/*.spec.js ./server/**/**/*.spec.js --require @babel/polyfill --require @babel/register",
+    "test": "npm run test-server && npm run test-client"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
