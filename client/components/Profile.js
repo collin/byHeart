@@ -96,19 +96,16 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleNewPassage() {
-      localStorage.clear()
       dispatch(gotPassage({}))
-      history.push('/newpassage')
+      history.push('/passage/new')
     },
     handleEditPassage(passage) {
-      localStorage.setItem('passage', JSON.stringify(passage))
       dispatch(gotPassage(passage))
-      history.push('/newpassage')
+      history.push(`/passages/${passage.id}/edit`)
     },
     handleTrainPassage(passage) {
-      localStorage.setItem('passage', JSON.stringify(passage))
       dispatch(gotPassage(passage))
-      history.push('/train')
+      history.push(`/train/${passage.id}`)
     },
     loadInitialData() {
       dispatch(fetchPassages())
